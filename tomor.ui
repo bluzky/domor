@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='utf-8'?>
+<interface>
+  <object class="ttk.Frame" id="main_frame">
+    <property name="height">250</property>
+    <property name="relief">flat</property>
+    <property name="width">400</property>
+    <layout>
+      <property name="column">0</property>
+      <property name="columnspan">1</property>
+      <property name="propagate">False</property>
+      <property name="row">0</property>
+    </layout>
+    <child>
+      <object class="ttk.Label" id="count_down">
+        <property name="anchor">center</property>
+        <property name="font">{Droid Sans} 48 {}</property>
+        <property name="foreground">#0095cc</property>
+        <property name="justify">center</property>
+        <property name="relief">flat</property>
+        <property name="text" translatable="yes">25:00</property>
+        <property name="textvariable">string:remaining_time</property>
+        <bind add="" handler="callback" sequence="&lt;1&gt;" />
+        <layout>
+          <property name="column">0</property>
+          <property name="padx">120</property>
+          <property name="pady">60 10</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="tk.Button" id="btn_start">
+        <property name="command">btn_start_clicked</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Button" id="btn_setting">
+        <property name="command">btn_setting_clicked</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="padx">10</property>
+          <property name="pady">10</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+          <property name="sticky">ne</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Button" id="btn_reset">
+        <property name="command">btn_reset_clicked</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="padx">10</property>
+          <property name="pady">60</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+          <property name="sticky">ne</property>
+        </layout>
+      </object>
+    </child>
+  </object>
+</interface>
