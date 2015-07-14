@@ -9,6 +9,7 @@
       <property name="columnspan">1</property>
       <property name="propagate">False</property>
       <property name="row">0</property>
+      <property name="rowspan">1</property>
     </layout>
     <child>
       <object class="ttk.Label" id="count_down">
@@ -23,19 +24,22 @@
         <layout>
           <property name="column">0</property>
           <property name="padx">120</property>
-          <property name="pady">60 10</property>
+          <property name="pady">40 0</property>
           <property name="propagate">True</property>
           <property name="row">0</property>
+          <property name="sticky">n</property>
         </layout>
       </object>
     </child>
     <child>
       <object class="tk.Button" id="btn_start">
         <property name="command">btn_start_clicked</property>
+        <property name="overrelief">flat</property>
         <layout>
           <property name="column">0</property>
+          <property name="pady">10 0</property>
           <property name="propagate">True</property>
-          <property name="row">2</property>
+          <property name="row">3</property>
         </layout>
       </object>
     </child>
@@ -58,10 +62,49 @@
         <layout>
           <property name="column">0</property>
           <property name="padx">10</property>
-          <property name="pady">60</property>
+          <property name="pady">60 10</property>
           <property name="propagate">True</property>
           <property name="row">0</property>
           <property name="sticky">ne</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Label" id="lb_pomodoros">
+        <property name="image">pomo_32.png</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="padx">0 100</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Label" id="lb_count">
+        <property name="font">{Droid Sans} 12 {}</property>
+        <property name="foreground">#666666</property>
+        <property name="text" translatable="yes">0</property>
+        <property name="textvariable">int:lb_po_count</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="padx">0 50</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
+        </layout>
+      </object>
+    </child>
+    <child>
+      <object class="ttk.Label" id="lb_po_name">
+        <property name="font">{Droid Sans} 12 {}</property>
+        <property name="foreground">#666666</property>
+        <property name="text" translatable="yes">pomodoro</property>
+        <property name="textvariable">string:lb_po_name</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="padx">50 0</property>
+          <property name="propagate">True</property>
+          <property name="row">2</property>
         </layout>
       </object>
     </child>

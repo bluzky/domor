@@ -44,6 +44,7 @@ class MainWindow(Frame):
         self.state = self.IDLE
         self.time = settings.short_work_time
         self.work_time = 0
+        self.count = 0
         self.reset()
 
         # set button setting icon
@@ -58,6 +59,11 @@ class MainWindow(Frame):
         time_string = "%02d:%02d" % (self.time / 60, self.time % 60)
         content = self.builder.get_variable("remaining_time")
         content.set(time_string)
+
+    def _update_pomodoro_count(self):
+        self.lb_po_count.set(self.count)
+        label  = "pomodoro" if self.count == 1 else "pomodoros"
+        self.lb_po_name.set(label)
 
     def _update_button_image(self, button_id, img_path):
         """
@@ -154,8 +160,12 @@ class MainWindow(Frame):
                 if self.work_time != 0 and self.work_time % self.settings.long_work_time == 0:
                     # complete long work period
                     self.start_break_period( self.settings.long_break_time )
+                    self.count += 1
+                    self._update_pomodoro_count()
                 elif self.time == 0:
                     self.start_break_period( self.settings.short_break_time )
+                    self.count += 1
+                    self._update_pomodoro_count()
                 else:
                     self.time -= 1
                     self.work_time += 1
@@ -183,5 +193,4 @@ def main():
     root.mainloop()
 
 
-if __name__ == '__main__':
-    main()
+main()
