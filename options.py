@@ -41,8 +41,7 @@ class OptionWindow(Toplevel):
         self.sb_wminute.set(self.settings.short_work_time/60)
         self.sb_bminute.set(self.settings.short_break_time/60)
         self.sb_bsecond.set(self.settings.short_break_time%60)
-        self.lb_whour.set(self.settings.long_work_time/3600)
-        self.lb_wminute.set((self.settings.long_work_time%3600)/60)
+        self.lb_num_short.set(self.settings.long_work_time)
         self.lb_bminute.set(self.settings.long_break_time/60)
         self.lb_bsecond.set(self.settings.long_break_time%60)
 
@@ -51,14 +50,13 @@ class OptionWindow(Toplevel):
         sb_wminute = self.sb_wminute.get()
         sb_bminute = self.sb_bminute.get()
         sb_bsecond = self.sb_bsecond.get()
-        lb_whour = self.lb_whour.get()
-        lb_wminute = self.lb_wminute.get()
+        lb_num_short = self.lb_num_short.get()
         lb_bminute = self.lb_bminute.get()
         lb_bsecond = self.lb_bsecond.get()
 
         self.settings.short_work_time = sb_wminute*60
         self.settings.short_break_time = sb_bminute*60 + sb_bsecond
-        self.settings.long_work_time = lb_whour*3600 + lb_wminute*60
+        self.settings.long_work_time = lb_num_short
         self.settings.long_break_time = lb_bminute*60 + lb_bsecond
 
         #write new setting to file
@@ -92,19 +90,11 @@ class OptionWindow(Toplevel):
             new_bsecond = 59
             self.sb_bsecond.set(new_bsecond)
 
-    def lb_whour_lostfocus(self, event):
-        new_whour = self.lb_whour.get()
-        if new_whour <= 0 or new_whour > 10: # max long work period is 10 hour, this is my default
-            self.lb_whour.set(self.settings.long_work_time/3600)# reset default
+    def lb_num_short_lostfocus(self, event):
+        new_whour = self.lb_num_short.get()
+        if new_whour <= 1 or new_whour > 20: # max long work period is 10 hour, this is my default
+            self.lb_num_short.set(self.settings.long_work_time)# reset default
 
-    def lb_wminute_lostfocus(self, event):
-        new_wminute = self.lb_wminute.get()
-        if new_wminute <= 0:
-            new_wminute = 0
-            self.lb_wminute.set(new_wminute)# reset default
-        elif new_wminute >= 60:
-            new_wminute = 59
-            self.lb_wminute.set(new_wminute)
 
     def lb_bminute_lostfocus(self, event):
         new_bminute = self.lb_bminute.get()

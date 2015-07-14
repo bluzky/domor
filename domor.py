@@ -157,14 +157,14 @@ class MainWindow(Frame):
         if self.state != self.IDLE:
 
             if self.state == self.WORK:
-                if self.work_time != 0 and self.work_time % self.settings.long_work_time == 0:
-                    # complete long work period
-                    self.start_break_period( self.settings.long_break_time )
+                if self.time == 0:
                     self.count += 1
-                    self._update_pomodoro_count()
-                elif self.time == 0:
-                    self.start_break_period( self.settings.short_break_time )
-                    self.count += 1
+
+                    # long_work_time is the number of short working session between long break
+                    if self.count % self.settings.long_work_time == 0:
+                        self.start_break_period(self.settings.long_break_time)
+                    else:
+                        self.start_break_period( self.settings.short_break_time )
                     self._update_pomodoro_count()
                 else:
                     self.time -= 1

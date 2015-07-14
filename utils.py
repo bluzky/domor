@@ -20,7 +20,7 @@ class Settings(object):
         # default value
         self.short_work_time = 1500
         self.short_break_time = 300
-        self.long_work_time = 6000
+        self.long_work_time = 4
         self.long_break_time = 900
 
     def to_json(self):
