@@ -5,9 +5,11 @@ from PIL import Image, ImageTk
 import pygubu
 import pygubu.builder.tkstdwidgets
 import pyglet
-import sys
+
 from utils import *
 from options import OptionWindow
+import sys
+import os.path
 
 
 class MainWindow(Frame):
@@ -20,12 +22,9 @@ class MainWindow(Frame):
         self.builder = builder = pygubu.Builder()
 
         # 2: Load an ui file
-        builder.add_from_file(PoResources.UI_DEF)
+        builder.add_from_file(get_resource(PoResources.UI_DEF))
 
         # 3: Set images path before creating any widget
-        img_path = os.getcwd() + "/img"
-        print img_path
-        img_path = os.path.abspath(img_path)
         builder.add_resource_path(img_path)
 
         # 4: Create the widget using a master as parent
@@ -48,8 +47,8 @@ class MainWindow(Frame):
         self.reset()
 
         # set button setting icon
-        self._update_button_image('btn_setting', PoResources.IMG_SETTING)
-        self._update_button_image('btn_reset', PoResources.IMG_RESET)
+        self._update_button_image('btn_setting', get_resource(PoResources.IMG_SETTING))
+        self._update_button_image('btn_reset', get_resource(PoResources.IMG_RESET))
 
     def _update_time(self):
         """
@@ -89,7 +88,7 @@ class MainWindow(Frame):
         self.time = self.settings.short_work_time
         self.btn_state = self.STOP
 
-        self._update_button_image('btn_start', PoResources.IMG_PLAY)
+        self._update_button_image('btn_start', get_resource(PoResources.IMG_PLAY))
         self._update_time()
 
     def btn_start_clicked(self):
@@ -99,7 +98,7 @@ class MainWindow(Frame):
         if self.btn_state != self.RUN:
             self.btn_state = self.RUN
             self.state = self.WORK
-            self._update_button_image('btn_start', PoResources.IMG_PAUSE)
+            self._update_button_image('btn_start', get_resource(PoResources.IMG_PAUSE))
         elif self.state == self.BREAK:
             # if time is counting and in break period and user click PAUSE button
             # reset timer and button state
@@ -107,7 +106,7 @@ class MainWindow(Frame):
         else:  # if timer is counting, pause it
             self.btn_state = self.PAUSE
             self.state = self.IDLE
-            self._update_button_image('btn_start', PoResources.IMG_PLAY)
+            self._update_button_image('btn_start', get_resource(PoResources.IMG_PLAY))
 
     def btn_setting_clicked(self):
         """
@@ -124,7 +123,7 @@ class MainWindow(Frame):
         self.time = break_time
 
         # play a sound
-        song = pyglet.media.load(PoResources.SOUND_BELL)
+        song = pyglet.media.load(get_resource(PoResources.SOUND_BELL))
         song.play()
 
         # restore window
@@ -136,21 +135,21 @@ class MainWindow(Frame):
         self.master.wm_attributes("-topmost", 0)
 
         # change button to skip
-        self._update_button_image('btn_start', PoResources.IMG_SKIP)
+        self._update_button_image('btn_start', get_resource(PoResources.IMG_SKIP))
 
     def start_work_period(self):
         self.state = self.WORK
         self.time = self.settings.short_work_time
 
         # play a sound
-        song = pyglet.media.load(PoResources.SOUND_BELL)
+        song = pyglet.media.load(get_resource(PoResources.SOUND_BELL))
         song.play()
 
         # minimize to task ba
         self.master.wm_state("iconic")
 
         # change button to play
-        self._update_button_image('btn_start', PoResources.IMG_PAUSE)
+        self._update_button_image('btn_start', get_resource(PoResources.IMG_PAUSE))
 
     def count_down(self):
         self.master.after(1000, self.count_down)
@@ -191,6 +190,5 @@ def main():
     root.tk.call('wm', 'iconphoto', root._w, img)
     root.resizable(width=False, height=False)
     root.mainloop()
-
 
 main()

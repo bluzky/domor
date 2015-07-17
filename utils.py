@@ -1,5 +1,29 @@
 __author__ = 'bluzky'
 import json
+import sys
+import os.path
+
+exe_path = ""
+exe_dir = ""
+
+if hasattr(sys, 'frozen'):
+    exe_path = sys.executable
+    exe_dir = os.path.dirname(exe_path)
+else:
+    exe_path = sys.argv[0]
+    exe_dir = os.path.dirname(exe_path)
+
+img_path = os.path.join(exe_dir, "img")
+sound_path = os.path.join(exe_dir, "sound")
+
+def get_image( img_name):
+    return os.path.join(img_path, img_name)
+
+def get_sound( sound_name):
+    return os.path.join(sound_path, sound_name)
+
+def get_resource( resource_name):
+    return os.path.join(exe_dir, resource_name)
 
 class Settings(object):
     """
