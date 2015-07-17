@@ -1,6 +1,6 @@
 # domor
 A Simple pomodoro application which help you to apply Pomodoro techinque
-![screen shot](http://kebano.net/wp-content/uploads/2015/07/domor_app1.png)
+![screen shot](https://farm4.staticflickr.com/3773/19586175048_f7a5522c65_o.png)
 
 
 ## Dependencies:
